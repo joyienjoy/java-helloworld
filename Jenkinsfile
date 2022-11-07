@@ -14,7 +14,8 @@ pipeline {
             }
         }
         stage('Deploy') {
-            sshagent(['tomcat-centos']) {
+            steps {
+              sshagent(['tomcat-centos']) {
                     sh '''
                     scp ssh -o StrictHostKeyChecking=no -l target/*.war joydeep@52.246.168.32:/var/lib/tomcat/webapps/
                     
@@ -22,5 +23,6 @@ pipeline {
                     '''
             }
         }
+      }
     }
 }
